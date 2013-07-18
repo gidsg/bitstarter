@@ -22,6 +22,7 @@ References:
 */
 
 var fs = require('fs');
+var rest = require('restler');
 var program = require('commander');
 var cheerio = require('cheerio');
 var HTMLFILE_DEFAULT = "index.html";
@@ -39,6 +40,15 @@ var assertFileExists = function(infile) {
 var cheerioHtmlFile = function(htmlfile) {
     return cheerio.load(fs.readFileSync(htmlfile));
 };
+
+var cheerioHtmlFile2 = function()
+{rest.get('http://google.com/').on('complete', function(result){
+mystring= (JSON.stringify(result));
+return mystring;
+    });
+
+};
+console.log(cheerioHtmlFile2());
 
 var loadChecks = function(checksfile) {
     return JSON.parse(fs.readFileSync(checksfile));
